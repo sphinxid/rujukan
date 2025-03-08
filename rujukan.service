@@ -1,0 +1,13 @@
+[Unit]
+Description=Rujukan Paste Service
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/home/firman/coding/python/rujukan
+ExecStart=/usr/local/bin/gunicorn --workers 3 --bind 0.0.0.0:5000 wsgi:app
+Restart=always
+Environment="FLASK_ENV=production"
+
+[Install]
+WantedBy=multi-user.target

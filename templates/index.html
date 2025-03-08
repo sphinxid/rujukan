@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Rujukan - Home{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <section class="hero">
+        <h1>Welcome to Rujukan</h1>
+        <p>Share text snippets quickly and easily</p>
+        <a href="{{ url_for('new_paste') }}" class="btn btn-primary">Create New Paste</a>
+    </section>
+
+    <section class="recent-pastes">
+        <h2>Recent Pastes</h2>
+        {% if recent_pastes %}
+            <div class="paste-list">
+                {% for paste in recent_pastes %}
+                    <div class="paste-item">
+                        <div class="paste-info">
+                            <h3>
+                                <a href="{{ url_for('view_paste', paste_id=paste.id) }}">
+                                    {{ paste.title if paste.title else 'Untitled Paste' }}
+                                </a>
+                            </h3>
+                            <span class="paste-date">Created: {{ paste.created_at_formatted }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-pastes">No pastes have been created yet. Be the first to create one!</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
